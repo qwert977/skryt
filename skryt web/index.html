@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKRYT | Official Store</title>
+    <meta name="description" content="Official Skryt Clothing and Accessories. Premium streetwear.">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/products.js"></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-links">
+            <div class="nav-item">
+                <a href="#shop">Shop</a>
+                <!-- DROPDOWN MENU -->
+                <div class="dropdown-menu">
+                    <div class="dropdown-col">
+                        <h5>Collections</h5>
+                        <h3>New<br>Arrivals</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 10px;">The latest from Skryt Studios.</p>
+                    </div>
+                    <div class="dropdown-col">
+                        <h5>Clothing</h5>
+                        <ul>
+                            <li><a href="product.html?id=hoodie">Hoodies</a></li>
+                            <li><a href="product.html?id=pants">Pants</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-col">
+                        <h5>Accessories</h5>
+                        <ul>
+                            <li><a href="product.html?id=glasses">Sunglasses</a></li>
+                            <li><a href="product.html?id=balaklava">Headwear</a></li>
+                            <li><a href="product.html?id=bag">Bags</a></li>
+                            <li><a href="product.html?id=belt">Belts</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-col">
+                        <h5>Objects</h5>
+                        <ul>
+                            <li><a href="product.html?id=keychain">Keychains</a></li>
+                            <li><a href="product.html?id=socks">Socks</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item"><a href="about.html" data-i18n="about">About Us</a></div>
+        </div>
+        <div class="brand" onclick="window.location.href='index.html'" style="cursor:pointer">Skryt</div>
+        <div class="icons">
+            <div class="language-switcher" onclick="toggleLanguage()" style="cursor:pointer" title="Toggle Language (EN/ES)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="opacity: 0.8;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7.06-3.6-7.55-7.55H8.9c.43 3.65 3.06 6.55 6.6 7.42-.81.82-1.74 1.46-2.5 2.13zm-5.11-9.93c.49-3.95 3.6-7.06 7.55-7.55v5.42H5.89zm13.11 0h-5.11V4.45c3.95.49 7.06 3.6 7.55 7.55zm-7.55 7.55v-5.42h5.11c-.49 3.95-3.6 7.06-7.55 7.55z"/>
+                </svg>
+            </div>
+            <div class="icon-btn" id="search-trigger" data-i18n="search">SEARCH</div>
+            <div class="icon-btn" id="account-trigger" data-i18n="account">ACCOUNT</div>
+            <div class="icon-btn" id="wishlist-trigger" data-i18n="wishlist">♡ (0)</div>
+            <div class="icon-btn" id="cart-trigger" data-i18n="cart">CART (0)</div>
+        </div>
+    </nav>
+
+    <!-- SIDE DRAWERS -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    
+    <div class="drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h3 data-i18n="cartTitle">Cart</h3>
+            <span class="close-drawer" data-i18n="close">CLOSE</span>
+        </div>
+        <div class="drawer-content" id="cart-items">
+            <!-- Items injected by main.js -->
+            <p style="text-align:center; margin-top: 50px; opacity: 0.5;">Your cart is empty.</p>
+        </div>
+        <div class="drawer-footer">
+            <button class="add-to-cart" onclick="processCheckout()" style="font-size: 1rem;" data-i18n="checkout">Checkout</button>
+        </div>
+    </div>
+
+    <div class="drawer" id="wishlist-drawer">
+        <div class="drawer-header">
+            <h3 data-i18n="wishlistTitle">Wishlist</h3>
+            <span class="close-drawer" data-i18n="close">CLOSE</span>
+        </div>
+        <div class="drawer-content" id="wishlist-items">
+            <!-- Items injected by main.js -->
+            <p style="text-align:center; margin-top: 50px; opacity: 0.5;">No favorites yet.</p>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+    <div class="search-modal" id="search-modal">
+        <div style="display: flex; justify-content: flex-end;">
+            <span class="close-drawer" id="close-search">CLOSE</span>
+        </div>
+        <div class="search-input-wrapper">
+            <input type="text" id="search-input" placeholder="Type to search...">
+        </div>
+        <div class="search-results" id="search-results">
+            <!-- Results appear here -->
+        </div>
+    </div>
+
+    <!-- ACCOUNT MODAL (NEW) -->
+    <div class="drawer" id="account-drawer">
+        <div class="drawer-header">
+            <h3>Account</h3>
+            <span class="close-drawer">CLOSE</span>
+        </div>
+        <div class="drawer-content" id="account-view">
+            <div class="auth-form" id="login-form">
+                <h2>Skryt Member - Sign In</h2>
+                <p class="subtext">Log in with your email and password:</p>
+                
+                <div class="auth-input-group">
+                    <input type="email" placeholder="Email">
+                </div>
+                
+                <div class="auth-input-group">
+                    <input type="password" placeholder="Password">
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button class="auth-btn" id="login-btn">Log In</button>
+                
+                <div class="auth-footer">
+                    Not a Skryt Member yet? <span class="auth-link" id="show-register">Create your account</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <img src="assets/images/campaign_model.jpg" alt="Skryt Campaign" class="hero-bg" id="hero-bg">
+        <div class="hero-content">
+            <h1 class="script-font" style="font-size: 10rem; color: var(--color-white); mix-blend-mode: overlay;" data-i18n="heroTitle">Skryt</h1>
+            <p class="subtitle" style="color: var(--color-white);" data-i18n="heroSubtitle">New Collection 2026</p>
+            <a href="#shop" class="btn" data-i18n="explore">Explore Now</a>
+        </div>
+    </header>
+
+    <!-- ROLLING MARQUEE -->
+    <div class="marquee-wrapper">
+        <div class="marquee">
+            <span>PREMIUM STREETWEAR</span> <span>•</span> 
+            <span>NEW ARRIVALS</span> <span>•</span> 
+            <span>WORLDWIDE SHIPPING</span> <span>•</span> 
+            <span>SKRYT STUDIOS</span> <span>•</span>
+            <span>PREMIUM STREETWEAR</span> <span>•</span> 
+            <span>NEW ARRIVALS</span> <span>•</span> 
+            <span>WORLDWIDE SHIPPING</span> <span>•</span> 
+            <span>SKRYT STUDIOS</span> <span>•</span>
+        </div>
+    </div>
+
+    <!-- FEATURED SHOP SECTION -->
+    <section class="collection" id="shop">
+        <div class="section-header">
+            <div>
+                <h2 data-i18n="essentials">Essentials</h2>
+                <span class="script-font" data-i18n="core">Core Collection</span>
+            </div>
+            <a href="#shop" class="btn" style="margin:0; border-bottom: 2px solid var(--color-black); border-top:none; border-left:none; border-right:none; padding: 10px 0;" data-i18n="viewStore">View Store</a>
+        </div>
+
+        <div class="grid" id="product-grid">
+            <!-- Product 1: Glasses -->
+            <div class="product-card fade-in" onclick="window.location.href='product.html?id=glasses'">
+                <div class="product-badge">New</div>
+                <div class="product-img-wrapper">
+                    <img src="assets/images/glasses_onyx.png" alt="Onyx Sport Shades" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-title">Onyx Sport Shades</span>
+                    <span class="product-price">€ 79.95</span>
+                </div>
+            </div>
+
+            <!-- Product 2: Hoodie -->
+            <div class="product-card fade-in" onclick="window.location.href='product.html?id=hoodie'">
+                <div class="product-badge">Campaign</div>
+                <div class="product-img-wrapper">
+                    <img src="assets/images/hoodies_trio.png" alt="Skryt Hoodie" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-title">Signature Hoodie</span>
+                    <span class="product-price">€ 79.95</span>
+                </div>
+            </div>
+
+            <!-- Product 3: Pants -->
+            <div class="product-card fade-in" onclick="window.location.href='product.html?id=pants'">
+                <div class="product-img-wrapper">
+                    <img src="assets/images/pants_black.png" alt="Cargo Pants" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-title">Cargo Pants</span>
+                    <span class="product-price">€ 69.95</span>
+                </div>
+            </div>
+
+            <!-- Product 4: Bag -->
+            <div class="product-card fade-in" onclick="window.location.href='product.html?id=bag'">
+                <div class="product-img-wrapper">
+                    <img src="assets/images/bag_beige.png" alt="Tofu Suede Bag" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-title">Tofu Suede Bag</span>
+                    <span class="product-price">€ 99.95</span>
+                </div>
+            </div>
+
+             <!-- Product 5: Belt -->
+             <div class="product-card fade-in" onclick="window.location.href='product.html?id=belt'">
+                <div class="product-img-wrapper">
+                    <img src="assets/images/belt_black.png" alt="Skryt Belt" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-title">Skryt Buckle Belt</span>
+                    <span class="product-price">€ 49.95</span>
+                </div>
+            </div>
+
+             <!-- Product 6: Scarf -->
+             <div class="product-card fade-in" onclick="window.location.href='product.html?id=scarf'">
+                <div class="product-img-wrapper">
+                    <img src="assets/images/scarves_duo.png" alt="Nomad Scarf" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-title">Nomad Scarf</span>
+                    <span class="product-price">€ 34.95</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDITORIAL BANNER -->
+    <section class="editorial-banner" id="campaign">
+        <h2>EMBRACE<br>THE<br><span class="script-font">Unknown</span></h2>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="about">
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">Skryt</div>
+                <p style="margin-top:20px; font-size: 0.9rem; max-width: 300px; opacity: 0.7;" data-i18n="footerDesc">
+                    Born from the streets. High-quality accessories and apparel for those who dictate their own style.
+                </p>
+                <a href="about.html" style="font-size: 0.8rem; text-decoration: underline; opacity: 0.6;" data-i18n="about">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="social">Social</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com/sskryttt">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@sskryttt">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col" id="service">
+                <h4 data-i18n="support">Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="contact.html" data-i18n="contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="payment-methods" style="margin-bottom: 20px;">
+                <!-- Visa -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20" style="background:#fff; border-radius:2px; padding:2px;">
+                    <path d="M35 10l-2 12h-3l2-12h3zm11 0l-2.5 12h-2.5l-1-4-1 4h-2.5l-2.5-12h2.5l1.5 8 1.5-8h2zm8 4c0-1.5-1-2.5-3-2.5h-4l-.5 2.5h3.5l.5-2.5z" fill="#1A1F71"/>
+                </svg>
+                <!-- Mastercard -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20">
+                    <circle cx="40" cy="16" r="12" fill="#EB001B"/>
+                    <circle cx="60" cy="16" r="12" fill="#F79E1B" fill-opacity="0.8"/>
+                </svg>
+                <!-- Apple Pay -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20" style="background:#fff; border-radius:2px; padding:2px;">
+                    <path d="M30 16c0-3 2-5 5-5s5 2 5 5-2 5-5 5-5-2-5-5z" fill="#000"/>
+                </svg>
+            </div>
+            <span>&copy; 2026 Skryt Studios. All Rights Reserved.</span>
+            <span><a href="shipping.html" data-i18n="terms">Terms & Conditions</a> | <a href="shipping.html" data-i18n="privacy">Privacy Policy</a></span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

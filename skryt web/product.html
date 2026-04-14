@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | SKRYT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/products.js"></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar" style="background: var(--color-black); mix-blend-mode: normal;">
+        <div class="nav-links">
+            <div class="nav-item">
+                <a href="index.html#shop">Shop</a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-col">
+                        <h5>Clothing</h5>
+                        <ul>
+                            <li><a href="product.html?id=hoodie">Hoodies</a></li>
+                            <li><a href="product.html?id=pants">Pants</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-col">
+                        <h5>Accessories</h5>
+                        <ul>
+                            <li><a href="product.html?id=glasses">Sunglasses</a></li>
+                            <li><a href="product.html?id=balaklava">Headwear</a></li>
+                            <li><a href="product.html?id=bag">Bags</a></li>
+                            <li><a href="product.html?id=belt">Belts</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-col">
+                        <h5>Objects</h5>
+                        <ul>
+                            <li><a href="product.html?id=keychain">Keychains</a></li>
+                            <li><a href="product.html?id=socks">Socks</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item"><a href="about.html" data-i18n="about">About Us</a></div>
+        </div>
+        <div class="brand" onclick="window.location.href='index.html'" style="cursor:pointer">Skryt</div>
+        <div class="icons">
+            <div class="language-switcher" onclick="toggleLanguage()" style="cursor:pointer" title="Toggle Language (EN/ES)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="opacity: 0.8;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7.06-3.6-7.55-7.55H8.9c.43 3.65 3.06 6.55 6.6 7.42-.81.82-1.74 1.46-2.5 2.13zm-5.11-9.93c.49-3.95 3.6-7.06 7.55-7.55v5.42H5.89zm13.11 0h-5.11V4.45c3.95.49 7.06 3.6 7.55 7.55zm-7.55 7.55v-5.42h5.11c-.49 3.95-3.6 7.06-7.55 7.55z"/>
+                </svg>
+            </div>
+            <div class="icon-btn" id="search-trigger" data-i18n="search">SEARCH</div>
+            <div class="icon-btn" id="account-trigger" data-i18n="account">ACCOUNT</div>
+            <div class="icon-btn" id="wishlist-trigger" data-i18n="wishlist">♡ (0)</div>
+            <div class="icon-btn" id="cart-trigger" data-i18n="cart">CART (0)</div>
+        </div>
+    </nav>
+
+     <!-- SIDE DRAWERS -->
+     <div class="drawer-overlay" id="drawer-overlay"></div>
+    
+     <div class="drawer" id="cart-drawer">
+         <div class="drawer-header">
+             <h3 data-i18n="cartTitle">Cart</h3>
+             <span class="close-drawer" data-i18n="close">CLOSE</span>
+         </div>
+         <div class="drawer-content" id="cart-items">
+             <p style="text-align:center; margin-top: 50px; opacity: 0.5;">Your cart is empty.</p>
+         </div>
+         <div class="drawer-footer">
+             <button class="add-to-cart" onclick="processCheckout()" style="font-size: 1rem;" data-i18n="checkout">Checkout</button>
+         </div>
+     </div>
+ 
+     <div class="drawer" id="wishlist-drawer">
+         <div class="drawer-header">
+             <h3 data-i18n="wishlistTitle">Wishlist</h3>
+             <span class="close-drawer" data-i18n="close">CLOSE</span>
+         </div>
+         <div class="drawer-content" id="wishlist-items">
+             <p style="text-align:center; margin-top: 50px; opacity: 0.5;">No favorites yet.</p>
+         </div>
+     </div>
+ 
+     <!-- SEARCH MODAL -->
+     <div class="search-modal" id="search-modal">
+         <div style="display: flex; justify-content: flex-end;">
+             <span class="close-drawer" id="close-search">CLOSE</span>
+         </div>
+         <div class="search-input-wrapper">
+             <input type="text" id="search-input" placeholder="Type to search...">
+         </div>
+         <div class="search-results" id="search-results">
+             <!-- Results appear here -->
+         </div>
+     </div>
+
+     <!-- ACCOUNT DRAWER -->
+     <div class="drawer" id="account-drawer">
+        <div class="drawer-header">
+            <h3>Account</h3>
+            <span class="close-drawer">CLOSE</span>
+        </div>
+        <div class="drawer-content" id="account-view">
+            <div class="auth-form" id="login-form">
+                <h2>Skryt Member - Sign In</h2>
+                <p class="subtext">Log in with your email and password:</p>
+                
+                <div class="auth-input-group">
+                    <input type="email" placeholder="Email">
+                </div>
+                
+                <div class="auth-input-group">
+                    <input type="password" placeholder="Password">
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button class="auth-btn" id="login-btn">Log In</button>
+                
+                <div class="auth-footer">
+                    Not a Skryt Member yet? <span class="auth-link" id="show-register">Create your account</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="product-page" id="product-container">
+        <!-- Content will be injected by JavaScript -->
+        <div style="grid-column: 1 / -1; text-align: center; padding-top: 100px;">
+            <p>Loading Product...</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">Skryt</div>
+                <p style="margin-top:20px; font-size: 0.9rem; max-width: 300px; opacity: 0.7;">
+                    Born from the streets. High-quality accessories and apparel for those who dictate their own style.
+                </p>
+            </div>
+            <div class="footer-col" id="service">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com/sskryttt">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@sskryttt">TikTok</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="payment-methods" style="margin-bottom: 20px;">
+                <!-- Visa -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20" style="background:#fff; border-radius:2px; padding:2px;">
+                    <path d="M35 10l-2 12h-3l2-12h3zm11 0l-2.5 12h-2.5l-1-4-1 4h-2.5l-2.5-12h2.5l1.5 8 1.5-8h2zm8 4c0-1.5-1-2.5-3-2.5h-4l-.5 2.5h3.5l.5-2.5z" fill="#1A1F71"/>
+                </svg>
+                <!-- Mastercard -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20">
+                    <circle cx="40" cy="16" r="12" fill="#EB001B"/>
+                    <circle cx="60" cy="16" r="12" fill="#F79E1B" fill-opacity="0.8"/>
+                </svg>
+                <!-- Apple Pay -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20" style="background:#fff; border-radius:2px; padding:2px;">
+                    <path d="M30 16c0-3 2-5 5-5s5 2 5 5-2 5-5 5-5-2-5-5z" fill="#000"/>
+                </svg>
+            </div>
+            <span>&copy; 2026 Skryt Studios. All Rights Reserved.</span>
+            <span><a href="shipping.html" data-i18n="terms">Terms & Conditions</a> | <a href="shipping.html" data-i18n="privacy">Privacy Policy</a></span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

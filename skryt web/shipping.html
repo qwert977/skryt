@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping & Returns | SKRYT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/products.js"></script>
+    <style>
+        .info-page { padding: 120px 40px; max-width: 800px; margin: 0 auto; min-height: 80vh; }
+        .info-page h1 { font-size: 4rem; margin-bottom: 60px; text-transform: uppercase; letter-spacing: -2px; }
+        .policy-section { margin-bottom: 60px; }
+        .policy-section h2 { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px solid #000; display: inline-block; padding-bottom: 5px; }
+        .policy-section p { font-size: 1.1rem; opacity: 0.7; line-height: 1.8; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar" style="background: var(--color-black); mix-blend-mode: normal;">
+        <div class="nav-links">
+            <div class="nav-item"><a href="index.html#shop" data-i18n="shop">Shop</a></div>
+            <div class="nav-item"><a href="about.html" data-i18n="about">About Us</a></div>
+        </div>
+        <div class="brand" onclick="window.location.href='index.html'" style="cursor:pointer">Skryt</div>
+        <div class="icons">
+            <div class="language-switcher" onclick="toggleLanguage()" style="cursor:pointer" title="Toggle Language (EN/ES)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="opacity: 0.8;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7.06-3.6-7.55-7.55H8.9c.43 3.65 3.06 6.55 6.6 7.42-.81.82-1.74 1.46-2.5 2.13zm-5.11-9.93c.49-3.95 3.6-7.06 7.55-7.55v5.42H5.89zm13.11 0h-5.11V4.45c3.95.49 7.06 3.6 7.55 7.55zm-7.55 7.55v-5.42h5.11c-.49 3.95-3.6 7.06-7.55 7.55z"/>
+                </svg>
+            </div>
+            <div class="icon-btn" id="search-trigger" data-i18n="search">SEARCH</div>
+            <div class="icon-btn" id="account-trigger" data-i18n="account">ACCOUNT</div>
+            <div class="icon-btn" id="wishlist-trigger" data-i18n="wishlist">♡ (0)</div>
+            <div class="icon-btn" id="cart-trigger" data-i18n="cart">CART (0)</div>
+        </div>
+    </nav>
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="cart-drawer"><div class="drawer-header"><h3 data-i18n="cartTitle">Cart</h3><span class="close-drawer" data-i18n="close">CLOSE</span></div><div class="drawer-content" id="cart-items"></div><div class="drawer-footer"><button class="add-to-cart" onclick="processCheckout()" style="font-size: 1rem;" data-i18n="checkout">Checkout</button></div></div>
+    <div class="drawer" id="account-drawer"><div class="drawer-header"><h3>Account</h3><span class="close-drawer">CLOSE</span></div><div class="drawer-content" id="account-view"></div></div>
+
+    <main class="info-page">
+        <h1 class="fade-in" data-i18n="shippingTitle">Shipping & Returns</h1>
+        
+        <section class="policy-section fade-in">
+            <h2 data-i18n="shippingPolicyTitle">Shipping Policy</h2>
+            <p data-i18n="shippingPolicyText">We offer worldwide shipping. All orders are tracked. Once your order has been dispatched, you will receive a tracking number via email.</p>
+            <p><strong><span data-i18n="euShipping">European Union: 2-5 Business Days</span></strong><br><strong><span data-i18n="rowShipping">Rest of World: 7-12 Business Days</span></strong></p>
+        </section>
+
+        <section class="policy-section fade-in">
+            <h2 data-i18n="returnPolicyTitle">Return Policy</h2>
+            <p data-i18n="returnPolicyText">If you are not 100% satisfied with your purchase, you can return your order for a full refund or exchange within 14 days from the date of delivery.</p>
+            <p data-i18n="returnStipulation">The items must be in the same condition you received them and in the original packaging.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">Skryt</div>
+                <p style="margin-top:20px; font-size: 0.9rem; max-width: 300px; opacity: 0.7;" data-i18n="footerDesc">
+                    Born from the streets. High-quality accessories and apparel for those who dictate their own style.
+                </p>
+            </div>
+            <div class="footer-col" id="service">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping & Returns</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com/sskryttt">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@sskryttt">TikTok</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="payment-methods" style="margin-bottom: 20px;">
+                <!-- Visa -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20" style="background:#fff; border-radius:2px; padding:2px;">
+                    <path d="M35 10l-2 12h-3l2-12h3zm11 0l-2.5 12h-2.5l-1-4-1 4h-2.5l-2.5-12h2.5l1.5 8 1.5-8h2zm8 4c0-1.5-1-2.5-3-2.5h-4l-.5 2.5h3.5l.5-2.5z" fill="#1A1F71"/>
+                </svg>
+                <!-- Mastercard -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20">
+                    <circle cx="40" cy="16" r="12" fill="#EB001B"/>
+                    <circle cx="60" cy="16" r="12" fill="#F79E1B" fill-opacity="0.8"/>
+                </svg>
+                <!-- Apple Pay -->
+                <svg class="payment-icon" viewBox="0 0 100 32" width="60" height="20" style="background:#fff; border-radius:2px; padding:2px;">
+                    <path d="M30 16c0-3 2-5 5-5s5 2 5 5-2 5-5 5-5-2-5-5z" fill="#000"/>
+                </svg>
+            </div>
+            <span data-i18n="copyright">&copy; 2026 Skryt Studios. All Rights Reserved.</span>
+            <span><a href="shipping.html" data-i18n="terms">Terms & Conditions</a> | <a href="shipping.html" data-i18n="privacy">Privacy Policy</a></span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
